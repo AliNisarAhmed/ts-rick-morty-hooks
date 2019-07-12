@@ -1,4 +1,4 @@
-import { MARK_FAVORITE } from "./actionConstants";
+import { MARK_FAVORITE, UNMARK_FAVORITE, FETCH_DATA } from "./actionConstants";
 import { IState, IEpisode } from "./interfaces";
 
 const initialState: IState = {
@@ -23,6 +23,13 @@ export default function reducer(
           favorites: [...state.favorites, ...clickedEpisode]
         };
       }
+    case UNMARK_FAVORITE:
+      return {
+        episodes: state.episodes,
+        favorites: state.favorites.filter(ep => ep.id !== action.id)
+      };
+    case FETCH_DATA:
+      return action.payload;
     default:
       return state;
   }

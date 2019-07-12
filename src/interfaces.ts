@@ -10,7 +10,7 @@ export interface IState {
 
 export interface IEpisode {
   id: string;
-  image: string;
+  image: { medium: string };
   name: string;
   number: number;
   season: number;

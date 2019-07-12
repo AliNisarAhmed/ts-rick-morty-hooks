@@ -15,6 +15,14 @@ class App extends React.Component<AppProps, any> {
     this.props.actions.markFavorite(id);
   };
 
+  unmarkFavorite = (id: string) => () => {
+    this.props.actions.unmarkFavorite(id);
+  };
+
+  componentDidMount() {
+    this.props.actions.fetchData();
+  }
+
   render() {
     return (
       <div>
@@ -27,13 +35,13 @@ class App extends React.Component<AppProps, any> {
           {this.props.favorites.map((episode: IEpisode) => (
             <section key={episode.id} className="episode">
               <img
-                src={episode.image ? episode.image : ""}
+                src={episode.image ? episode.image.medium : ""}
                 alt={`Rick & Morty ${episode.name}`}
               />
               <h2>{episode.name}</h2>
               <p>Episode Number: {episode.number}</p>
               <p>Season: {episode.season}</p>
-              <button onClick={() => {}}>Remove</button>
+              <button onClick={this.unmarkFavorite(episode.id)}>Remove</button>
             </section>
           ))}
         </section>
@@ -43,7 +51,7 @@ class App extends React.Component<AppProps, any> {
           {this.props.episodes.map((episode: IEpisode) => (
             <section key={episode.id} className="episode">
               <img
-                src={episode.image ? episode.image : ""}
+                src={episode.image ? episode.image.medium : ""}
                 alt={`Rick & Morty ${episode.name}`}
               />
               <h2>{episode.name}</h2>
